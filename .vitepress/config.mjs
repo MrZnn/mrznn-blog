@@ -71,8 +71,21 @@ export default defineConfig({
         },
       },
     },
-
-  }
+    lastUpdated: true, // string | boolean
+    
+  },
+  plugins: [
+    [
+        '@vuepress/last-updated',
+        {
+            transformer: (timestamp, lang) => {
+                //return moment(timestamp).fromNow()
+                return moment(timestamp).format("LLLL")
+            }
+        }
+    ]
+],
+  
 })
 
 
