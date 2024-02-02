@@ -1,0 +1,37 @@
+# vscode 适配 go语言
+
+## 1、要求
+
+编写测试和函数很类似，其中有一些规则
+- 程序需要在一个名为 xxx_test.go 的文件中编写
+- 测试函数的命名必须以单词 Test 开始
+- 测试函数只接受一个参数 t *testing.T
+
+## 2、例子
+    ```go
+    package iteration
+
+    import "testing"
+
+    func TestRepeat(t *testing.T) {
+        repeated := Repeat("a")
+        expected := "aaaaa"
+
+        if repeated != expected {
+            t.Errorf("expected '%q' but got '%q'", expected, repeated)
+        }
+    }
+    
+    func TestRepeat1(b *testing.B) {
+        b.Run("", func(b *testing.B) {
+            for i := 0; i < b.N; i++ {
+                Repeat("a")
+            }
+        })
+    }
+    ```
+
+## 3、覆盖率查看
+
+- 到测试文件目录下 执行  `go test -cover`
+- 
