@@ -8,7 +8,6 @@ export default defineConfig({
   title: "MrZnnBlog",
   description: "逆流而上",
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     outlineTitle: "文章目录",
     outline: [2, 6],
     logo: "/logo.png",
