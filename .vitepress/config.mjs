@@ -3,7 +3,7 @@ import { set_sidebar } from "./utils/auto-gen-sidebar.mjs";	// 改成自己的�
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/docs-demo/',
+  // base: '/docs-demo/',  // 部署github需要删除 
   head:[["link", {rel: "icon", href: "/logo.png"}]],
   title: "MrZnnBlog",
   description: "逆流而上",
