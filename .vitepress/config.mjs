@@ -7,7 +7,7 @@ const base = process.env.BASE || '/'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   // base: '/docs-demo/',  // 部署github需要删除 
-  base,
+  // base,
   head:[["link", {rel: "icon", href: "/logo.png"}]],
   title: "MrZnnBlog",
   description: "逆流而上",
