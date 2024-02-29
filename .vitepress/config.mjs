@@ -33,6 +33,12 @@ export default defineConfig({
       },
       {text: '后端', link: '/back-end/postgres/'},
       { 
+        text: '问题',
+        items: [
+          {text: 'go-汇总', link: '/face/go/'}
+        ]
+      },
+      { 
         text: '杂记',
         items: [
           {text: 'markdown', link: '/other/markdown/'}
@@ -43,6 +49,7 @@ export default defineConfig({
     sidebar: { 
       "/front-end/react": set_sidebar("/front-end/react/"),
       "/langages/go": set_sidebar("/langages/go/"),  
+      "/face/go": set_sidebar("/face/go/"),
       "/back-end/postgres": set_sidebar("/back-end/postgres/"),
       "/other/markdown": set_sidebar("/other/markdown/"),
     },

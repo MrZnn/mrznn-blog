@@ -3,7 +3,7 @@ title: time.After和time.Second区别
 lang: en-US
 ---
 
-## <-time.After(5 * time.Second)：
+## <-time.After(5 * time.Second)
 
 1. 这是 Go 语言中的一种非阻塞等待延时的方式。
 2. time.After(5 * time.Second) 返回一个类型为 <-chan time.Time 的通道，该通道将在5秒后发送一个时间值。
@@ -28,7 +28,7 @@ lang: en-US
     fmt.Println("5 seconds have passed")
     ```
 
-## time.NewTimer(5 * time.Second)：
+## time.NewTimer(5 * time.Second)
 
 1. time.NewTimer 返回一个 time.Timer 类型的值，该值具有一个 C 属性，是一个通道 (<-chan time.Time)。
 2. time.Timer 可以在预定的时间之后向其 C 通道发送一个时间值。你可以通过 <-timer.C 操作来阻塞等待该时间值。
@@ -38,6 +38,38 @@ lang: en-US
     <-timer.C
     fmt.Println("5 seconds have passed")
     ```
+
+## example
+
+    ```go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // 使用 <-time.After(time.Second)
+        go func() {
+            <-time.After(time.Second)
+            fmt.Println("Using <-time.After: One second has passed")
+        }()
+
+        // 使用 time.Sleep(time.Second)
+        go func() {
+            time.Sleep(time.Second)
+            fmt.Println("Using time.Sleep: One second has passed")
+        }()
+
+        // 防止程序提前退出
+        time.Sleep(2 * time.Second)
+    }
+
+    // 两者的主要区别在于 <-time.After(time.Second) 允许协程在等待的同时继续执行其他操作，而 time.Sleep(time.Second) 则会阻塞协程的执行，直到指定的时间过去为止
+
+    ```
+
 
 ## 总结
 
