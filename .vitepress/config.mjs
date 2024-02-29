@@ -33,7 +33,7 @@ export default defineConfig({
       },
       {text: '后端', link: '/back-end/postgres/'},
       { 
-        text: '问题',
+        text: '&',
         items: [
           {text: 'go-汇总', link: '/face/go/'}
         ]
