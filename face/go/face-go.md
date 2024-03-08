@@ -54,3 +54,100 @@ func main() {
 
 ## 类型别名与类型定义的区别
 &emsp;&emsp;在 Go 语言中，`type MyInt1 int` 定义了一个新类型 MyInt1，它与 int 是不同的类型，即使它们底层类型相同。而 `type MyInt2 = int` 则是类型别名的声明，它将 MyInt2 作为 int 的别名，它们实际上是同一个类型。对 类型转换 `var i1 MyInt1 = MyInt1(i)`
+
+
+## 类型选择与类型断言
+&emsp;&emsp;在 Go 语言中，类型断言（Type Assertion）和类型选择（Type Switch）是两个不同的概念，它们用于处理接口类型和类型检查的不同场景。
+
+### 类型断言（Type Assertion）
+&emsp;&emsp;类型断言用于在运行时检查接口值中存储的具体类型，并将该接口值转换为该具体类型。类型断言的语法是 value, ok := interfaceValue.(Type)，其中 interfaceValue 是一个接口类型的值，Type 是我们希望断言的具体类型。value 将会是被断言后的具体类型值，而 ok 是一个布尔值，表示断言是否成功。
+
+&emsp;&emsp;如果断言成功，value 将包含接口值中存储的具体值，ok 将为 true。如果断言失败（即接口值中存储的不是指定的类型），value 将是零值，ok 将为 false，并且不会触发恐慌（panic）。
+
+&emsp;&emsp;类型断言通常用于在编写泛型代码或处理多种类型的值时，确保接口值中存储的是期望的类型，并安全地进行类型转换。
+
+### 类型选择（Type Switch）
+&emsp;&emsp;类型选择是一种按顺序从几个类型断言中选择分支的结构。它的语法类似于一般的 switch 语句，但是类型选择中的 case 语句是针对给定接口值所存储的值的类型进行比较，而不是值的比较。
+
+&emsp;&emsp;类型选择的语法是 switch v := i.(type) { case T: // 处理 T 类型的情况 case S: // 处理 S 类型的情况 default: // 处理其他类型的情况 }。在这个结构中，i 是一个接口类型的值，v 将按照 i 中存储的实际类型进行类型断言，并保存在变量 v 中。
+
+&emsp;&emsp;类型选择用于在多个可能的类型之间进行选择，并执行相应的代码块。它类似于类型断言的多个版本，但更加简洁和易读。
+
+&emsp;&emsp;区别和作用
+&emsp;&emsp;类型断言和类型选择的主要区别在于它们的用途和语法结构。类型断言用于在运行时检查接口值的具体类型，并将其转换为该类型。它主要用于单个类型断言的情况。而类型选择用于在多个可能的类型之间进行选择，并执行相应的代码块。它主要用于处理多种类型的值，并根据实际类型执行不同的操作。
+
+&emsp;&emsp;总结来说，类型断言用于单个类型的检查和转换，而类型选择用于多个类型的选择和分支处理。两者都是处理接口类型和类型检查的重要工具，但具有不同的语法和用途。
+
+##  接口、结构体和函数来构建可扩展的组件
+
+```go
+package main
+
+import "net/http"
+
+type SearchEngine struct {
+	Recallers []Recaller //召回，得到搜索结果
+	Sorter    Sorter
+}
+
+type SearchEngine2 struct {
+	Recallers []func() []int //召回，得到搜索结果
+	Sorter    func([]int) []int
+}
+
+type Recaller interface {
+	Recall() []int
+}
+
+type Sorter interface {
+	Sort([]int) []int
+}
+
+// 具体的召回策略
+func r() []int {
+	return nil
+}
+
+// 具体的排序策略
+func s([]int) []int {
+	return nil
+}
+
+type Rec struct{}
+
+func (Rec) Recall() []int {
+	return r()
+}
+
+type RecallType func() []int
+
+func (rt RecallType) Recall() []int {
+	return rt()
+}
+
+func main() {
+	se := SearchEngine{
+		Recallers: []Recaller{Rec{}},
+	}
+	_ = se
+
+	se2 := SearchEngine2{
+		Recallers: []func() []int{r},
+		Sorter:    s,
+	}
+	_ = se2
+
+	se3 := SearchEngine{
+		Recallers: []Recaller{RecallType(r)},
+	}
+	_ = se3
+
+	http.Handle("", http.HandlerFunc(Boy))
+
+}
+
+func Boy(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Boy"))
+}
+
+```
