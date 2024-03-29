@@ -41,7 +41,8 @@ export default defineConfig({
       { 
         text: '杂记',
         items: [
-          {text: 'markdown', link: '/other/markdown/'}
+          {text: 'markdown', link: '/other/markdown/'},
+          {text: 'docker', link: '/other/docker/'}
         ]
       }
     ],
@@ -52,6 +53,7 @@ export default defineConfig({
       "/face/go": set_sidebar("/face/go/"),
       "/back-end/postgres": set_sidebar("/back-end/postgres/"),
       "/other/markdown": set_sidebar("/other/markdown/"),
+      "/other/docker": set_sidebar("/other/docker/"),
     },
 
     // sidebar: false, // 关闭侧边栏
