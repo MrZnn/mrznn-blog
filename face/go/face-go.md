@@ -205,3 +205,11 @@ func main() {
     fmt.Printf("%#v", m["foo"])   // %#v 格式化输出详细信息
 }
 ```
+
+## 常见3 - 外部引用
+
+[50 Shades of Go：新 Golang 开发人员的陷阱、陷阱和常见错误](https://golang50shad.es/)
+
+
+ 
+[An image](/shadesofgo.html)
