@@ -28,7 +28,8 @@ export default defineConfig({
       { 
         text: '语言',
         items: [
-          {text: 'go', link: '/langages/go/'}
+          {text: 'go', link: '/langages/go/'},
+          {text: 'python3', link: '/langages/python3/'},
         ]
       },
       {text: '后端', link: '/back-end/postgres/'},
@@ -49,7 +50,8 @@ export default defineConfig({
 
     sidebar: { 
       "/front-end/react": set_sidebar("/front-end/react/"),
-      "/langages/go": set_sidebar("/langages/go/"),  
+      "/langages/go": set_sidebar("/langages/go/"),
+      "/langages/python3": set_sidebar("/langages/python3/"),    
       "/face/go": set_sidebar("/face/go/"),
       "/back-end/postgres": set_sidebar("/back-end/postgres/"),
       "/other/markdown": set_sidebar("/other/markdown/"),
