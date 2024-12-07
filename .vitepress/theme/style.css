@@ -150,3 +150,12 @@
   justify-content: center;
   /* 其他样式属性，根据需要添加 */
 }
+
+/* 放大镜 */
+/* .vitepress/theme/style/var.css */
+.medium-zoom-overlay {
+  z-index: 30;
+}
+.medium-zoom-image {
+  z-index: 9999 !important; /* 给的值是21，但是实测盖不住，直接999 */
+}

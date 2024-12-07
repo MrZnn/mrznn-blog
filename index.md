@@ -6,6 +6,9 @@ hero:
   name: "MrZnnBlog"
   text: ""
   tagline: 逆流而上
+  image:
+    src: /background.png
+    alt: 背景图
   actions:
     - theme: brand
       text: Markdown Examples
@@ -22,3 +25,13 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
+<script setup lang="ts">
+import confetti from "canvas-confetti";
+
+/* 纸屑 */
+confetti({
+  particleCount: 100,
+  spread: 170,
+  origin: { y: 0.6 },
+});
+</script>
